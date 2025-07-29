@@ -48,7 +48,7 @@ app.get("/posts", (req, res) => {
 
 //CHALLENGE 2: GET a specific post by id
 app.get("/posts/:id", (req, res) => {
-  const post = posts.find((post) => post.id === parseInt(post.id));
+  const post = posts.find((post) => post.id === parseInt(req.params.id));
   if (post) {
     res.json(post);
   } else {
@@ -102,7 +102,7 @@ app.delete("/posts/:id", (req, res) => {
     );
     if (index === -1)
       return res.status(404).json({ message: "Post not found" });
-    posts.slice(index, 1);
+    posts.splice(index, 1);
     res.json({ message: "Post deleted" });
   } catch (error) {
     res.status(500).json({ message: "Internal server error" });
